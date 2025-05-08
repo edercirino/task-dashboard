@@ -5,7 +5,7 @@ import { ListChecks, User, LogOut } from "lucide-react";
 const SideBar = () => {
   const navLinkClass = ({ isActive }) =>
     `flex items-center gap-2 px-4 py-2 rounded text-white hover:bg-gray-500 transition ${
-      isActive ? "bg-gray-200 font-semibold" : "text-gray-700"
+      isActive ? "bg-gray-400 font-semibold" : "text-gray-700"
     }`;
 
   return (
