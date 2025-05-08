@@ -1,12 +1,9 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from ",,/pages/LoginPage";
+import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-
-function TaskListPage() {
-  return <h1 className="text-2xl font-bold p-4">Task List</h1>;
-}
+import TaskListPage from "../pages/TaskListPage";
 
 const AppRoutes = () => {
   return (
@@ -16,12 +13,13 @@ const AppRoutes = () => {
       <Route
         path="/task"
         element={
-          <PrivateRoute>
-            <DashboardLayout />
-          </PrivateRoute>
+          // <PrivateRoute>
+          //   <DashboardLayout />
+          // </PrivateRoute>
+          <DashboardLayout />
         }
       />
-      <Route path="tasks" element={TaskListPage} />
+      <Route path="tasks" element={<TaskListPage />} />
       <Route path="profile" element={<h1>Profile Page</h1>} />
     </Routes>
   );
