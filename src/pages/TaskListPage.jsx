@@ -1,39 +1,63 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+const initialTasks = [
+  { id: 1, title: "Study React", completed: false },
+  { id: 2, title: "Fix API integration", completed: true },
+  { id: 3, title: "Write documentation", completed: false },
+];
 
 const TaskListPage = () => {
-  const tasks = [
-    { id: 1, title: "Study React", completed: false },
-    { id: 2, title: "Fix API integration", completed: true },
-    { id: 3, title: "Write documentation", completed: false },
-  ];
-  return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-6">My Tasks</h2>
+  const [tasks, setTasks] = React.useState(initialTasks);
 
-      <ul className="spacy-y-4">
+  const toggleCompleted = (id) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  return (
+    <div className="p-4 max-w-2xl mx-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Task List</h1>
+        <Link
+          to="/tasks/new"
+          className="bg-green-600 text-white px-4 py-2 rounded"
+        >
+          New Task
+        </Link>
+      </div>
+
+      <ul className="spacy-y-2">
         {tasks.map((task) => (
           <li
             key={task.id}
-            className={`p-4 rounded shadow-md ${
-              task.completed ? "bg-green-100" : "bg-white"
-            }`}
+            className="bg-white border shadow rounded p-4 flex justify-between mb-2"
           >
-            <div className="flex justify-between items-center">
-              <span
-                className={`${
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => toggleCompleted(task.id)}
+              />
+              <Link
+                to={`/tasks/${task.id}`}
+                className={`text-blue-600 hover:underline ${
                   task.completed ? "line-through text-gray-500" : ""
                 }`}
               >
                 {task.title}
-              </span>
-              <span
-                className={`text-sm ${
-                  task.completed ? "text-green-600" : "text-yellow-600"
-                }`}
-              >
-                {task.completed ? "Done" : "In progress"}
-              </span>
+              </Link>
             </div>
+
+            <Link
+              to={`/tasks/${tasks.id}/edit`}
+              className="text-sm text-gray-600 hover:underline"
+            >
+              Edit
+            </Link>
           </li>
         ))}
       </ul>
