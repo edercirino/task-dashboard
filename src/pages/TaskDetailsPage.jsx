@@ -22,6 +22,8 @@ const TaskDetailsPage = () => {
   const handleEdit = () => {
     navigate(`/tasks/${id}/edit`);
   };
+
+  if (!task) return <p className="p-4">Loading...</p>;
   return (
     <div className="p-4 max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-4">Task Details</h2>
