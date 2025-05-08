@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Edit, Trash2 } from "lucide-react";
-import { Navigate } from "react-router-dom";
 
 const initialTasks = [
   { id: 1, title: "Study React", completed: false },
