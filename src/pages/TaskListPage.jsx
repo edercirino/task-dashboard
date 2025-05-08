@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Edit, Trash2 } from "lucide-react";
 
 const initialTasks = [
   { id: 1, title: "Study React", completed: false },
@@ -16,6 +17,13 @@ const TaskListPage = () => {
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
+  };
+
+  const deleteTask = (id) => {
+    const confirmed = window.confirm("Are you sure you want delete this task?");
+    if (confirmed) {
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    }
   };
 
   return (
@@ -52,12 +60,22 @@ const TaskListPage = () => {
               </Link>
             </div>
 
-            <Link
-              to={`/tasks/${tasks.id}/edit`}
-              className="text-sm text-gray-600 hover:underline"
-            >
-              Edit
-            </Link>
+            <div className="flex gap-3 text-sm">
+              <Link
+                to={`/tasks/${tasks.id}/edit`}
+                className="px-2 py-1 rounded text-gray-600 hover:underline"
+                title="Edit Task"
+              >
+                <Edit size={18} />
+              </Link>
+              <button
+                onClick={() => deleteTask(task.id)}
+                className="px-2 py-1 rounded text-red-600 hover:underline"
+                title="Delete"
+              >
+                <Trash2 size={18} />
+              </button>
+            </div>
           </li>
         ))}
       </ul>
