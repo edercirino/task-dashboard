@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import TaskListPage from "../pages/TaskListPage";
+import TaskCreatePage from "../pages/TaskCreatePage";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
       />
       <Route path="tasks" element={<TaskListPage />} />
       <Route path="profile" element={<h1>Profile Page</h1>} />
+      <Route path="tasks/new" element={<TaskCreatePage />} />
     </Routes>
   );
 };
