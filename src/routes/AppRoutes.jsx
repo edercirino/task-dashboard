@@ -23,11 +23,13 @@ const AppRoutes = () => {
           <DashboardLayout />
         }
       />
-      <Route path="tasks" element={<TaskListPage />} />
-      <Route path="tasks/new" element={<TaskCreatePage />} />
-      <Route path="tasks/:id/edit" element={<TaskEditPage />} />
-      <Route path="tasks/:id" element={<TaskDetailsPage />} />
-      <Route path="profile" element={<ProfilePage />} />
+      <Route path="/" element={<DashboardLayout />}>
+        <Route path="tasks" element={<TaskListPage />} />
+        <Route path="tasks/new" element={<TaskCreatePage />} />
+        <Route path="tasks/:id/edit" element={<TaskEditPage />} />
+        <Route path="tasks/:id" element={<TaskDetailsPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+      </Route>
     </Routes>
   );
 };
