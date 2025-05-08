@@ -18,6 +18,10 @@ const ProfilePage = () => {
     navigate("/login");
   };
 
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow rounded">
       <h1 className="text-2xl font-bold mb-4">Profile</h1>
@@ -41,8 +45,8 @@ const ProfilePage = () => {
       <div className="space-y-3">
         <button
           onClick={handleEditProfile}
-          className="w-full px-4 py-2 bg-blue-600 text-white rounded
-          hover:bg-blue-700 transition"
+          className="w-full px-4 py-2 bg-yellow-500 text-white rounded
+          hover:bg-yellow-700 transition"
         >
           Edit Profile
         </button>
@@ -59,6 +63,13 @@ const ProfilePage = () => {
            hover:bg-red-700 transition"
         >
           Logout
+        </button>
+        <button
+          onClick={handleBack}
+          className="w-full px-4 py-2 bg-slate-400 text-white rounded
+           hover:bg-slate-700 transition"
+        >
+          Back
         </button>
       </div>
     </div>

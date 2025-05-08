@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Edit, Trash2 } from "lucide-react";
+import { Navigate } from "react-router-dom";
 
 const initialTasks = [
   { id: 1, title: "Study React", completed: false },
@@ -30,12 +31,20 @@ const TaskListPage = () => {
     <div className="p-4 max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Task List</h1>
-        <Link
-          to="/tasks/new"
-          className="bg-green-600 text-white px-4 py-2 rounded"
-        >
-          New Task
-        </Link>
+        <div>
+          <Link
+            to="/"
+            className="mr-1 bg-slate-400 hover:bg-slate-700 text-white px-4 py-2 rounded"
+          >
+            Back
+          </Link>
+          <Link
+            to="/tasks/new"
+            className="bg-green-600 hover:bg-green-800 text-white px-4 py-2 rounded"
+          >
+            New Task
+          </Link>
+        </div>
       </div>
 
       <ul className="spacy-y-2">
