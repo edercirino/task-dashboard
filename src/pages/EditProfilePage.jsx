@@ -30,7 +30,7 @@ const EditProfilePage = () => {
         <div>
           <label className="block text-sm font-medium">Name</label>
           <input
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 mb-2 rounded"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -40,7 +40,7 @@ const EditProfilePage = () => {
           <div>
             <label className="block text-sm font-medium">Email</label>
             <input
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 mb-2 rounded"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -52,7 +52,7 @@ const EditProfilePage = () => {
               Password <span className="text-gray-500 text-sm">(optional)</span>
             </label>
             <input
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 mb-2 rounded"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
