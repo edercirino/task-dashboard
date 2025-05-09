@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   const handleEditProfile = () => {
-    alert("Edit Profile Action (Not implemented");
+    navigate("/profile/edit");
   };
 
   const handleLogout = () => {
