@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import ErrorMessage from "../components/ui/ErrorMessage";
+import useApiError from "../hooks/useApiError";
 
 const LoginPage = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { getErrorMessage } = useApiError();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setError(null);
+    setErrorMessage("");
+
+    if (!email || !password) {
+      setErrorMessage("Please fill in both fields.");
+      console.log("Campos vazios detectados");
+
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:3000/api/login", {
@@ -22,15 +32,19 @@ const LoginPage = () => {
         },
         body: JSON.stringify({ email, password }),
       });
+
       if (!response.ok) {
-        throw new Error("Invalid credentials");
+        const error = new Error("Login failed");
+        error.response = { status: response.status };
+        throw error;
       }
 
       const data = await response.json();
       login(data.token, data.user);
       navigate("/tasks");
     } catch (err) {
-      setError(err.message);
+      const msg = getErrorMessage(err);
+      setErrorMessage(msg);
     }
   }
 
@@ -41,7 +55,7 @@ const LoginPage = () => {
         className="bg-white p-8 rounded shadow-md w-full max-w-sm"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+        {errorMessage && <ErrorMessage message={errorMessage} />}
 
         <div className="mb-4">
           <label className="block text-sm font-medium">Email</label>
@@ -50,7 +64,6 @@ const LoginPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="mt-1 p-2 w-full border rounded"
-            required
           />
         </div>
 
@@ -61,7 +74,6 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="mt-1 p-2 w-full border rounded"
-            required
           />
         </div>
         <button

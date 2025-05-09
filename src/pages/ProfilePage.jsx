@@ -50,13 +50,7 @@ const ProfilePage = () => {
         >
           Edit Profile
         </button>
-        <button
-          onClick={handleEditProfile}
-          className="w-full px-4 py-2 bg-blue-600 text-white rounded 
-          hover:bg-blue-700 transition"
-        >
-          Change Password
-        </button>
+
         <button
           onClick={handleLogout}
           className="w-full px-4 py-2 bg-red-600 text-white rounded
