@@ -9,6 +9,7 @@ import TaskEditPage from "../pages/TaskEditPage";
 import TaskDetailsPage from "../pages/TaskDetailsPage";
 import ProfilePage from "../pages/ProfilePage";
 import EditProfilePage from "../pages/EditProfilePage";
+import RegisterPage from "../pages/RegisterPage";
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
         <Route path="tasks/:id" element={<TaskDetailsPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="profile/edit" element={<EditProfilePage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
     </Routes>
   );
