@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ErrorMessage from "..components/ui/ErrorMessage";
+import ErrorMessage from "../components/ui/ErrorMessage";
 
 const RegisterPage = () => {
   const [name, setName] = React.useState("");
