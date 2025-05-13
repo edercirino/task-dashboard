@@ -10,17 +10,17 @@ const useApiError = () => {
 
     switch (status) {
       case 400:
-        return "Invalid Request";
+        return "Error 400 - Invalid Request";
       case 401:
-        return "You must be logged in.";
+        return "Error 401 - You must be logged in.";
       case 403:
-        return "You are not permitted to do that.";
+        return "Error 403 - You are not permitted to do that.";
       case 404:
-        return "Resource not found.";
+        return "Error 404 - Resource not found.";
       case 422:
-        return "Validation failed. Please check your input data.";
+        return "Error 422 - Validation failed. Please check your input data.";
       case 500:
-        return "Server error. Please try again later.";
+        return "Error 500 - Server error. Please try again later.";
       default:
         return "Something went wrong.";
     }
