@@ -20,13 +20,11 @@ const AppRoutes = () => {
       <Route
         path="/"
         element={
-          // <PrivateRoute>
-          //   <DashboardLayout />
-          // </PrivateRoute>
-          <DashboardLayout />
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
         }
-      />
-      <Route path="/" element={<DashboardLayout />}>
+      >
         <Route path="tasks" element={<TaskListPage />} />
         <Route path="tasks/new" element={<TaskCreatePage />} />
         <Route path="tasks/:id/edit" element={<TaskEditPage />} />

@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 
-const PrivateRoutes = ({ children }) => {
+const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
@@ -11,4 +11,4 @@ const PrivateRoutes = ({ children }) => {
   return children;
 };
 
-export default PrivateRoutes;
+export default PrivateRoute;
