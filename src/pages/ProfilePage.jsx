@@ -1,14 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const mockUser = {
-  name: "Luke Doe",
-  email: "lukedoe@ecample.com",
-  role: "admin",
-};
+import { useAuth } from "../auth/AuthContext";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleEditProfile = () => {
     navigate("/profile/edit");
@@ -22,22 +18,24 @@ const ProfilePage = () => {
     navigate("/");
   };
 
+  if (!user) return <p>Loading user...</p>;
+
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow rounded">
       <h1 className="text-2xl font-bold mb-4">Profile</h1>
 
       <div className="space-y-2 mb-6">
         <div className="space-y-2 mb-6">
-          <strong>Name:</strong> {mockUser.name}
+          <strong>Name:</strong> {user.name}
         </div>
         <div>
-          <strong>Email:</strong> {mockUser.email}
+          <strong>Email:</strong> {user.email}
         </div>
         <div>
           <strong>Role:</strong>
           {""}
           <span className="uppercase text-sm bg-gray-100 px-2 py-0.5 rounded ">
-            {mockUser.role}
+            {user.role}
           </span>
         </div>
       </div>
