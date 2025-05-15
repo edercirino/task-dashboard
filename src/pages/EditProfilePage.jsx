@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 
 const EditProfilePage = () => {
   const navigate = useNavigate();
-  const { token, login } = useAuth();
+  const { user, token, login } = useAuth();
 
-  const [name, setName] = React.useState("Luke Doe");
-  const [email, setEmail] = React.useState("luke@example.com");
-  const [password, setPassword] = useState("");
+  const [name, setName] = React.useState(user.name);
+  const [email, setEmail] = React.useState(user.email);
+  const [password, setPassword] = React.useState("");
+  const [role, setRole] = React.useState(user.role);
   const [error, setError] = React.useState("");
 
   const handleSubmit = async (e) => {
@@ -18,6 +19,7 @@ const EditProfilePage = () => {
     const updateUser = {
       name,
       email,
+      role,
       ...(password && { password }),
     };
 
@@ -83,6 +85,22 @@ const EditProfilePage = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Leave blanck to keep current password"
             />
+
+            <div>
+              <label for="role" className="block text-sm font-medium">
+                Role
+              </label>
+              <select
+                name="role"
+                id="role"
+                value={role}
+                className="w-full border px-3 py-2 mb-2 rounded"
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="admin">Admin</option>
+                <option value="user">user</option>
+              </select>
+            </div>
             <button
               type="submit"
               className="bg-blue-600 
