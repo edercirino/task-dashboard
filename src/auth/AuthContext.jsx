@@ -10,8 +10,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [token, setToken] = React.useState(() => localStorage.getItem("token"));
   const [user, setUser] = React.useState(() => {
-    const saved = localStorage.getItem("user");
-    return saved ? JSON.parse(saved) : null;
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
   });
 
   function login(token, userData) {

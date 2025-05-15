@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ListChecks, User, LogOut } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
 
@@ -12,8 +12,8 @@ const SideBar = () => {
   const navButtonClass =
     "flex items-center gap-2 px-4 py-2 rounded text-white hover-gray-500 transition w-full";
 
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const { logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -21,8 +21,14 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="2-64  border-r bg-blue-500 h-full p-4">
+    <aside className="w-50  border-r bg-blue-500 h-full p-4">
       <h2 className="text-xl font-bold mb-6">Task Dashboard</h2>
+
+      {user && (
+        <p className="text-white mb-6">
+          Welcome, <strong>{user.name}</strong>
+        </p>
+      )}
 
       <nav className="flex flex-col space-y-2">
         <NavLink to="/tasks" className={navLinkClass}>
