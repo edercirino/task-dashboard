@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../components/ui/ErrorMessage";
-import { useAuth } from "../auth/AuthContext";
 
 const RegisterPage = () => {
   const [name, setName] = React.useState("");
@@ -12,7 +11,6 @@ const RegisterPage = () => {
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const navigate = useNavigate();
-  const { login } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -46,7 +44,6 @@ const RegisterPage = () => {
         throw new Error(data.errors?.join(", ") || "Registration failed");
       }
 
-      login(data.token, data.user);
       navigate("/tasks");
     } catch (err) {
       console.error("Register error:", err.message);
