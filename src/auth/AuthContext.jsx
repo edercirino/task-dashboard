@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   });
 
   function login(token, userData) {
+    console.log("Saving user data:", userData);
     setToken(token);
     setUser(userData);
     localStorage.setItem("token", token);

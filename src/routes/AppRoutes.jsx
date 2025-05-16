@@ -1,5 +1,4 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
@@ -11,11 +10,10 @@ import ProfilePage from "../pages/ProfilePage";
 import EditProfilePage from "../pages/EditProfilePage";
 import RegisterPage from "../pages/RegisterPage";
 
-const AppRoutes = () => {
+const AppRoute = () => {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
 
       <Route
         path="/"
@@ -31,9 +29,10 @@ const AppRoutes = () => {
         <Route path="tasks/:id" element={<TaskDetailsPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="profile/edit" element={<EditProfilePage />} />
+        <Route path="admin/users/new" element={<RegisterPage />} />
       </Route>
     </Routes>
   );
 };
 
-export default AppRoutes;
+export default AppRoute;

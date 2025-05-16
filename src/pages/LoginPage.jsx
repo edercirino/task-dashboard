@@ -82,12 +82,6 @@ const LoginPage = () => {
         >
           Login
         </button>
-        <Link
-          to={`/register`}
-          className="w-full block text-center mt-4 bg-green-600 text-white py-2 rounded hover:bg-green-700"
-        >
-          Register
-        </Link>
       </form>
     </div>
   );

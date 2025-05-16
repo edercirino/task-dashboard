@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ListChecks, User, LogOut } from "lucide-react";
+import { ListChecks, User, UserPlus, LogOut } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
 
 const SideBar = () => {
@@ -39,6 +39,11 @@ const SideBar = () => {
         <NavLink to="/profile" className={navLinkClass}>
           <User size={18} />
           Profile
+        </NavLink>
+
+        <NavLink to="/admin/users/new" className={navLinkClass}>
+          <UserPlus size={18} />
+          New User
         </NavLink>
 
         <button onClick={handleLogout} className={navButtonClass}>
