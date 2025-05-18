@@ -86,21 +86,23 @@ const EditProfilePage = () => {
               placeholder="Leave blanck to keep current password"
             />
 
-            <div>
-              <label for="role" className="block text-sm font-medium">
-                Role
-              </label>
-              <select
-                name="role"
-                id="role"
-                value={role}
-                className="w-full border px-3 py-2 mb-2 rounded"
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value="admin">Admin</option>
-                <option value="user">user</option>
-              </select>
-            </div>
+            {user.role == "admin" && (
+              <div>
+                <label for="role" className="block text-sm font-medium">
+                  Role
+                </label>
+                <select
+                  name="role"
+                  id="role"
+                  value={role}
+                  className="w-full border px-3 py-2 mb-2 rounded"
+                  onChange={(e) => setRole(e.target.value)}
+                >
+                  <option value="admin">Admin</option>
+                  <option value="user">user</option>
+                </select>
+              </div>
+            )}
             <button
               type="submit"
               className="bg-blue-600 
