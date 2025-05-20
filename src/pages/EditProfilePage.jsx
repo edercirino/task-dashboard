@@ -12,6 +12,8 @@ const EditProfilePage = () => {
   const [role, setRole] = React.useState(user.role);
   const [error, setError] = React.useState("");
 
+  const API_URL = "http://localhost:3000/api/v1/profile";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -24,7 +26,7 @@ const EditProfilePage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/profile", {
+      const response = await fetch(API_URL, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

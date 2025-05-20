@@ -9,6 +9,8 @@ import TaskDetailsPage from "../pages/TaskDetailsPage";
 import ProfilePage from "../pages/ProfilePage";
 import EditProfilePage from "../pages/EditProfilePage";
 import RegisterPage from "../pages/RegisterPage";
+import EditUserPage from "../pages/EditUserPage";
+import ManageUsersPage from "../pages/ManageUsersPage";
 
 const AppRoute = () => {
   return (
@@ -29,6 +31,8 @@ const AppRoute = () => {
         <Route path="tasks/:id" element={<TaskDetailsPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="profile/edit" element={<EditProfilePage />} />
+        <Route path="/users/:id/edit" element={<EditUserPage />} />
+        <Route path="/admin/users" element={<ManageUsersPage />} />
         <Route path="admin/users/new" element={<RegisterPage />} />
       </Route>
     </Routes>

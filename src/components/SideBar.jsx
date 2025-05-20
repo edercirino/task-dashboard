@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { ListChecks, User, UserPlus, LogOut } from "lucide-react";
+import { ListChecks, User, Users, LogOut } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
 
 const SideBar = () => {
@@ -41,9 +41,9 @@ const SideBar = () => {
         </NavLink>
 
         {user.role === "admin" && (
-          <NavLink to="/admin/users/new" className={navLinkClass}>
-            <UserPlus size={18} />
-            New User
+          <NavLink to="/admin/users" className={navLinkClass}>
+            <Users size={18} />
+            Manage Users
           </NavLink>
         )}
 

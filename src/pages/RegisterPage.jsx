@@ -10,6 +10,8 @@ const RegisterPage = () => {
   const [role, setRole] = React.useState("user");
   const [errorMessage, setErrorMessage] = React.useState("");
 
+  const API_URL = "http://localhost:3000/api/v1/signup";
+
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -30,7 +32,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/signup", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

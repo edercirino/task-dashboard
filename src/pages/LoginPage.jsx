@@ -9,6 +9,8 @@ const LoginPage = () => {
   const [password, setPassword] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
 
+  const API_URL = "http://localhost:3000/api/v1/login";
+
   const navigate = useNavigate();
   const { login } = useAuth();
   const { getErrorMessage } = useApiError();
@@ -25,7 +27,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/login", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
