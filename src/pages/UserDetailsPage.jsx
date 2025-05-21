@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-const UserDetails = () => {
+const UserDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -111,4 +111,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default UserDetailsPage;

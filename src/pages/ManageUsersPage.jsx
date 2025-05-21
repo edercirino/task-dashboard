@@ -1,5 +1,5 @@
 import React from "react";
-
+import { NavLink } from "react-router-dom";
 const ManageUsersPage = () => {
   const [users, setUsers] = React.useState([]);
   const [error, setError] = React.useState(null);
@@ -25,36 +25,37 @@ const ManageUsersPage = () => {
   }, []);
 
   return (
-    <div className="p6">
+    <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">All Users</h1>
       {error && <p className="text-red-500">{error}</p>}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {users.map((user) => (
-          <div
-            key={user.id}
-            className="border rounded p-4 shadow hover:bg-gray-50"
-          >
-            <p>
-              <strong>Name:</strong> {user.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {user.email}
-            </p>
-            <p>
-              <strong>Role:</strong> {user.role}
-            </p>
-            <button
-              className="mt-2 text-blue-600 underline"
-              onClick={() => {
-                window.localtin.href = `/users/${user.id}`;
-              }}
-            >
-              Details
-            </button>
-          </div>
-        ))}
-      </div>
+      <table className="table-auto md:table-fixed w-full">
+        <thead className="content-start border">
+          <tr>
+            <th className="text-left px-4 py-2">Name</th>
+            <th className="text-left px-4 py-2">Email</th>
+            <th className="text-left px-4 py-2">Role</th>
+            <th className="text-left px-4 py-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr className="odd:bg-gray-200 even:bg-gray-100">
+              <td className="px-4 py-2">{user.name}</td>
+              <td className="px-4 py-2">{user.email}</td>
+              <td className="px-4 py-2">{user.role}</td>
+              <td className="px-4 py-2">
+                <NavLink
+                  to={`/users/${user.id}`}
+                  className="text-blue-600 underline"
+                >
+                  Details
+                </NavLink>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
