@@ -40,13 +40,13 @@ const ManageUsersPage = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr className="odd:bg-gray-200 even:bg-gray-100">
+            <tr key={user.id} className="odd:bg-gray-200 even:bg-gray-100">
               <td className="px-4 py-2">{user.name}</td>
               <td className="px-4 py-2">{user.email}</td>
               <td className="px-4 py-2">{user.role}</td>
               <td className="px-4 py-2">
                 <NavLink
-                  to={`/users/${user.id}`}
+                  to={`/user/${user.id}`}
                   className="text-blue-600 underline"
                 >
                   Details

@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-const UserDetailsPage = () => {
+const UserDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ const UserDetailsPage = () => {
         if (!res.ok) throw new Error("Fail to get tasks");
         return res.json();
       })
-      .them((data) => setTasks(data))
+      .then((data) => setTasks(data))
       .catch((err) => setError(err.message));
   }, [id]);
 
@@ -81,8 +81,10 @@ const UserDetailsPage = () => {
             Edit
           </button>
 
-          <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+          <button
             onClick={handleDelete}
+            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          >
             Delete
           </button>
         </div>
@@ -111,4 +113,4 @@ const UserDetailsPage = () => {
   );
 };
 
-export default UserDetailsPage;
+export default UserDetailPage;
