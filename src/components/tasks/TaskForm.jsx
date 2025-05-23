@@ -1,11 +1,13 @@
 import React from "react";
 
-const TaskForm = ({ initialValues = {}, onSubmit, onCancel }) => {
-  const [title, setTitle] = React.useState(initialValues.title || "");
+const TaskForm = ({ onSubmit, onCancel }) => {
+  const [title, setTitle] = React.useState("");
+  const [description, SetDescription] = React.useState("");
+  const [status, setStatus] = React.useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ title });
+    onSubmit({ title, description, status });
   };
 
   return (
@@ -22,6 +24,33 @@ const TaskForm = ({ initialValues = {}, onSubmit, onCancel }) => {
           className="w-full border rounded px-3 py-2"
           required
         />
+      </div>
+
+      <div>
+        <label htmlFor="description" className="block font-semibold mb-1">
+          Description
+        </label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={(e) => SetDescription(e.target.value)}
+          className="w-full border rounded px-3 py-2"
+          rows="4"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="status" className="block font-semibold mb-1">
+          Status
+        </label>
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="border rounded w-full p-2"
+        >
+          <option value="pending">Pending</option>
+          <option value="done">Done</option>
+        </select>
       </div>
 
       <div className="flex justify-between">
