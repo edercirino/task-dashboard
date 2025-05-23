@@ -45,7 +45,7 @@ const TaskListPage = () => {
       const token = localStorage.getItem("token");
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user?.id;
-      const TASK_URL = `http://localhost:3000/api/v1/users/${userId}/tasks`;
+      const TASK_URL = `http://localhost:3000/api/v1/users/${userId}/tasks/${id}`;
 
       const response = await fetch(TASK_URL, {
         method: "DELETE",
@@ -59,6 +59,7 @@ const TaskListPage = () => {
       }
 
       setTasks((prev) => prev.filter((task) => task.id !== id));
+      toast.success("Task deleted successfully!");
     } catch (error) {
       console.log(error);
       alert("Failed to delete task!");
@@ -158,7 +159,7 @@ const TaskListPage = () => {
                 <button
                   onClick={() => deleteTask(task.id)}
                   className="px-2 py-1 rounded text-red-600 hover:underline"
-                  title="Delete"
+                  title="Delete task"
                 >
                   <Trash2 size={18} />
                 </button>

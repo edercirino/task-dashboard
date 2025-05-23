@@ -60,7 +60,7 @@ const UserDetailPage = () => {
 
   return (
     <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Detalhes do Usuário</h1>
+      <h1 className="text-2xl font-bold">User Details</h1>
 
       <div className="border p-4 rounded shadow">
         <p>
@@ -105,7 +105,7 @@ const UserDetailPage = () => {
 
       <button
         className="mt-6 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-        onClick={() => navigate("/manage-users")}
+        onClick={() => navigate("/admin/users")}
       >
         Back to the List
       </button>
