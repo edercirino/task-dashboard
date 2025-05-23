@@ -141,6 +141,11 @@ const TaskDetailsPage = () => {
       <p className="text-sm text-gray-500">
         Created at: {new Date(task.created_at).toLocaleString()}
       </p>
+      {task.status === "done" && (
+        <p className="text-sm text-green-600">
+          Task Completed at: {new Date(task.update_at).toLocaleString()}
+        </p>
+      )}
 
       <button
         onClick={() => navigate("/tasks")}

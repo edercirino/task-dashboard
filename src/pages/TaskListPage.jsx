@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Edit, Trash2 } from "lucide-react";
+import { toast } from "react-toastify";
 
 const TaskListPage = () => {
   const [tasks, setTasks] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [, setError] = React.useState(null);
 
   const fetchTasks = async () => {
     try {
@@ -71,6 +73,41 @@ const TaskListPage = () => {
     return <p className="text-center">Loading...</p>;
   }
 
+  const toggleTaskStatus = async (task) => {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
+    const newStatus = task.status === "done" ? "pending" : "done";
+    const TASK_API = `http://localhost:3000/api/v1/users/${user.id}/tasks/${task.id}`;
+
+    try {
+      const response = await fetch(TASK_API, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          task: {
+            title: task.title,
+            description: task.description,
+            status: newStatus,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update task status");
+      }
+
+      const updatedTask = await response.json();
+      setTasks((prev) => prev.map((t) => (t.id === task.id ? updatedTask : t)));
+      toast.success(`Task marked as ${newStatus}`);
+    } catch (err) {
+      setError(err.message);
+      toast.error("Could not update task status");
+    }
+  };
+
   return (
     <div className="p-4 max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-4">
@@ -97,19 +134,13 @@ const TaskListPage = () => {
               <div className="flex items-center gap-3">
                 <input
                   type="checkbox"
-                  checked={task.completed}
-                  onChange={() =>
-                    setTasks((prev) =>
-                      prev.map((t) =>
-                        t.id === task.id ? { ...t, completed: !t.completed } : t
-                      )
-                    )
-                  }
+                  checked={task.status === "done"}
+                  onChange={() => toggleTaskStatus(task)}
                 />
                 <Link
                   to={`/tasks/${task.id}`}
                   className={`text-blue-600 hover:underline ${
-                    task.completed ? "line-through text-gray-500" : ""
+                    task.status === "done" ? "line-through text-gray-500" : ""
                   }`}
                 >
                   {task.title}
