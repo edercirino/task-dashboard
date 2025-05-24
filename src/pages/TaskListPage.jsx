@@ -112,7 +112,7 @@ const TaskListPage = () => {
   return (
     <div className="p-4 max-w-2xl mx-auto">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Task List</h1>
+        <h1 className="text-2xl font-bold">Task List - My Tasks</h1>
         <div>
           <Link
             to="/tasks/new"

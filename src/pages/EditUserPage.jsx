@@ -112,7 +112,7 @@ const EditUserPage = () => {
 
           <button
             type="button"
-            onClick={() => navigate(`users/${id}`)}
+            onClick={() => navigate(`/user/${id}`)}
             className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
           >
             Cancel

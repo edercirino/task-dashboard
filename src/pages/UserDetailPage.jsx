@@ -95,9 +95,24 @@ const UserDetailPage = () => {
         {tasks.length === 0 ? (
           <p>This user doesn't have tasks</p>
         ) : (
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="space-y-3">
             {tasks.map((task) => (
-              <li key={task.id}>{task.title}</li>
+              <li
+                key={task.id}
+                className="border p-4 rounded shadow bg-white hover:shadow-md transition"
+              >
+                <p className="text-lg font-medium text-blue-600 hover:underline">
+                  <a href={`/tasks/${task.id}`}>{task.title}</a>
+                </p>
+                <p className="text-sm text-gray-600">
+                  Created at: {new Date(task.created_at).toLocaleString()}
+                </p>
+                {task.status === "done" && (
+                  <p className="text-sm text-green-600">
+                    Completed at: {new Date(task.completed_at).toLocaleString()}
+                  </p>
+                )}
+              </li>
             ))}
           </ul>
         )}
