@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const EditUserPage = () => {
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -41,6 +44,20 @@ const EditUserPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const updateUser = {
+      ...userData,
+    };
+
+    if (password && confirmPassword) {
+      updateUser.password = password;
+      updateUser.password_confirmation = confirmPassword;
+    }
+
+    if (password && password !== confirmPassword) {
+      setError("Passwords DO NOT match");
+      return;
+    }
+
     fetch(USER_API, {
       method: "PATCH",
       headers: {
@@ -54,7 +71,7 @@ const EditUserPage = () => {
         return res.json();
       })
       .then(() => {
-        navigate(`/users/${id}`);
+        navigate(`/user/${id}`);
       })
       .catch((err) => setError(err.message));
   };
@@ -73,7 +90,7 @@ const EditUserPage = () => {
             name="name"
             value={userData.name}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 mb-2 border rounded"
             required
           />
         </div>
@@ -85,8 +102,28 @@ const EditUserPage = () => {
             name="email"
             value={userData.email}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 mb-2 border rounded"
             required
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold">New Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border mb-2 px-3 py-2 rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold">Confirm New Password</label>
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="w-full border mb-2 px-3 py-2 rounded"
           />
         </div>
 
@@ -96,7 +133,7 @@ const EditUserPage = () => {
             name="role"
             value={userData.role}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 mb-2 border rounded"
           >
             <option value="user">User</option>
             <option value="admin">Admin</option>
