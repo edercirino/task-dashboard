@@ -35,6 +35,7 @@ const RegisterPage = () => {
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
         body: JSON.stringify({ user: newUser }),
@@ -46,7 +47,7 @@ const RegisterPage = () => {
         throw new Error(data.errors?.join(", ") || "Registration failed");
       }
 
-      navigate("/tasks");
+      navigate("/admin/users");
     } catch (err) {
       console.error("Register error:", err.message);
       setErrorMessage(err.message || "Error creating user");

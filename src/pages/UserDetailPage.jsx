@@ -1,5 +1,6 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import TaskForm from "../components/tasks/TaskForm";
 
 const UserDetailPage = () => {
   const { id } = useParams();
@@ -8,9 +9,12 @@ const UserDetailPage = () => {
   const [user, setUser] = React.useState(null);
   const [tasks, setTasks] = React.useState([]);
   const [error, setError] = React.useState(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const USER_API = `http://localhost:3000/api/v1/users/${id}`;
   const TASKS_API = `http://localhost:3000/api/v1/users/${id}/tasks`;
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   React.useEffect(() => {
     fetch(USER_API, {
@@ -48,10 +52,32 @@ const UserDetailPage = () => {
       })
         .then((res) => {
           if (!res.ok) throw new Error("Fail to delete user");
-          navigate("/manage-users");
+          navigate("/admin/users");
         })
         .then((data) => setTasks(data))
         .catch((err) => setError(err.message));
+    }
+  };
+
+  const handleCreateTask = async (taskData) => {
+    try {
+      const response = await fetch(TASKS_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ task: taskData }),
+      });
+
+      if (!response.ok) throw new Error("Failed to create task");
+
+      const data = await response.json();
+
+      setTasks((prev) => [...prev, data]);
+      setIsModalOpen(false);
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -92,8 +118,16 @@ const UserDetailPage = () => {
 
       <div>
         <h2 className="text-xl font-semibold mt-06 mb-2">Tasks of this user</h2>
+        {currentUser?.role !== "admin" && (
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="px-4 py-2 mb-3 bg-green-600 hover:bg-green-800 text-white rounded"
+          >
+            Create tasks to this user
+          </button>
+        )}
         {tasks.length === 0 ? (
-          <p>This user doesn't have tasks</p>
+          <p className="mt-3">This user doesn't have tasks</p>
         ) : (
           <ul className="space-y-3">
             {tasks.map((task) => (
@@ -117,6 +151,19 @@ const UserDetailPage = () => {
           </ul>
         )}
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black opacity-80 z-50">
+          <div className="bg-white p-6 rounded shadow-md w-full max-w-md opacity-100 relative">
+            <h2 className="text-xl font-semibold mb-4">Create Task</h2>
+            <TaskForm
+              onSubmit={handleCreateTask}
+              onCancel={() => setIsModalOpen(false)}
+              submitText="Create"
+            />
+          </div>
+        </div>
+      )}
 
       <button
         className="mt-6 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 const ManageUsersPage = () => {
   const [users, setUsers] = React.useState([]);
   const [error, setError] = React.useState(null);
@@ -29,7 +29,14 @@ const ManageUsersPage = () => {
       <h1 className="text-2xl font-bold mb-4">All Users</h1>
       {error && <p className="text-red-500">{error}</p>}
 
-      <table className="table-auto md:table-fixed w-full">
+      <Link
+        to={"/admin/users/new/"}
+        className="bg-green-600 hover:bg-green-800 text-white px-4 py-2 rounded"
+      >
+        Add new User
+      </Link>
+
+      <table className="table-auto md:table-fixed mt-4 w-full">
         <thead className="content-start border">
           <tr>
             <th className="text-left px-4 py-2">Name</th>

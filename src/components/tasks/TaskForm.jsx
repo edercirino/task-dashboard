@@ -3,7 +3,7 @@ import React from "react";
 const TaskForm = ({ onSubmit, onCancel }) => {
   const [title, setTitle] = React.useState("");
   const [description, SetDescription] = React.useState("");
-  const [status, setStatus] = React.useState();
+  const [status, setStatus] = React.useState("pending");
 
   const handleSubmit = (e) => {
     e.preventDefault();
