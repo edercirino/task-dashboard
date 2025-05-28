@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Edit, Trash2, ArrowLeft } from "lucide-react";
 import { toast } from "react-toastify";
+import { useAuth } from "../auth/AuthContext";
 
 const TaskDetailsPage = () => {
   const { id } = useParams();
@@ -13,6 +14,8 @@ const TaskDetailsPage = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const TASK_API = `http://localhost:3000/api/v1/users/${user.id}/tasks/${id}`;
+
+  const { user: currentUser } = useAuth();
 
   React.useEffect(() => {
     const fetchTask = async () => {
@@ -39,7 +42,7 @@ const TaskDetailsPage = () => {
 
   const deleteTask = async () => {
     const confirmed = window.confirm(
-      "Are you sure you want to delete this task"
+      "Are you sure you want to delete this task?"
     );
     if (!confirmed) return;
 
@@ -92,6 +95,10 @@ const TaskDetailsPage = () => {
       toast.error("Failed to update task status.");
       setError(err.message);
     }
+  };
+
+  const handleBack = () => {
+    navigate(`/user/${task.user.id}`);
   };
 
   return (
@@ -151,8 +158,18 @@ const TaskDetailsPage = () => {
         onClick={() => navigate("/tasks")}
         className="mt-4 flex items-center gap-1 text-blue-600 hover:underline"
       >
-        <ArrowLeft size={18} /> Back to List
+        <ArrowLeft size={18} /> Go to my task list
       </button>
+
+      {currentUser?.role === "admin" && (
+        <button
+          onClick={handleBack}
+          className="mt-2 flex items-center gap-1 text-blue-600 hover:underline"
+        >
+          <ArrowLeft size={18} /> Back to the{" "}
+          <span className="underline">{task.user.name}</span> page detail
+        </button>
+      )}
     </div>
   );
 };

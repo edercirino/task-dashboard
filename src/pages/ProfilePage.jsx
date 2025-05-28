@@ -14,10 +14,6 @@ const ProfilePage = () => {
     navigate("/login");
   };
 
-  const handleBack = () => {
-    navigate("/");
-  };
-
   if (!user) return <p>Loading user...</p>;
 
   return (
@@ -55,13 +51,6 @@ const ProfilePage = () => {
            hover:bg-red-700 transition"
         >
           Logout
-        </button>
-        <button
-          onClick={handleBack}
-          className="w-full px-4 py-2 bg-slate-400 text-white rounded
-           hover:bg-slate-700 transition"
-        >
-          Back
         </button>
       </div>
     </div>

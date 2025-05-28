@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import TaskForm from "../components/tasks/TaskForm";
+import { useAuth } from "../auth/AuthContext";
 
 const UserDetailPage = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const UserDetailPage = () => {
   const USER_API = `http://localhost:3000/api/v1/users/${id}`;
   const TASKS_API = `http://localhost:3000/api/v1/users/${id}/tasks`;
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const { user: currentUser } = useAuth();
 
   React.useEffect(() => {
     fetch(USER_API, {
@@ -118,7 +119,7 @@ const UserDetailPage = () => {
 
       <div>
         <h2 className="text-xl font-semibold mt-06 mb-2">Tasks of this user</h2>
-        {currentUser?.role !== "admin" && (
+        {currentUser?.role === "admin" && (
           <button
             onClick={() => setIsModalOpen(true)}
             className="px-4 py-2 mb-3 bg-green-600 hover:bg-green-800 text-white rounded"
@@ -136,7 +137,13 @@ const UserDetailPage = () => {
                 className="border p-4 rounded shadow bg-white hover:shadow-md transition"
               >
                 <p className="text-lg font-medium text-blue-600 hover:underline">
-                  <a href={`/tasks/${task.id}`}>{task.title}</a>
+                  <Link
+                    to={`/tasks/${task.id}`}
+                    state={{ fromUserId: user.id }}
+                    className="text-lg font-medium text-blue-600 hover:underline "
+                  >
+                    {task.title}
+                  </Link>
                 </p>
                 <p className="text-sm text-gray-600">
                   Created at: {new Date(task.created_at).toLocaleString()}
