@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import TaskForm from "../components/tasks/TaskForm";
 import { useAuth } from "../auth/AuthContext";
+import SearchBar from "../components/SearchBar";
 
 const UserDetailPage = () => {
   const { id } = useParams();
@@ -127,6 +128,7 @@ const UserDetailPage = () => {
             Create tasks to this user
           </button>
         )}
+
         {tasks.length === 0 ? (
           <p className="mt-3">This user doesn't have tasks</p>
         ) : (

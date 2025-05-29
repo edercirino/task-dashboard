@@ -2,20 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Edit, Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
+import SearchBar from "../components/SearchBar";
 
 const TaskListPage = () => {
   const [tasks, setTasks] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [, setError] = React.useState(null);
 
-  const fetchTasks = async () => {
+  const fetchTasks = async (query = "") => {
     try {
       const token = localStorage.getItem("token");
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user?.id;
-      const TASK_URL = `http://localhost:3000/api/v1/users/${userId}/tasks`;
+      const url = new URL(`http://localhost:3000/api/v1/users/${userId}/tasks`);
 
-      const response = await fetch(TASK_URL, {
+      if (query) {
+        url.searchParams.append("query", query);
+      }
+
+      const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -121,6 +126,10 @@ const TaskListPage = () => {
             New Task
           </Link>
         </div>
+      </div>
+
+      <div className="mb-3">
+        <SearchBar onSearch={(query) => fetchTasks(query)} />
       </div>
 
       {tasks.length === 0 ? (
