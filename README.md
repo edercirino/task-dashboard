@@ -3,7 +3,7 @@
 A modern and responsive **task and user dashboard** built with **React** and styled using **Tailwind CSS**.  
 This frontend interfaces with a secure Ruby on Rails API to manage users, authentication, and task control, featuring clean UX and role-based UI behavior.
 
-**This front-end application belongs to this [front-end project](https://github.com/edercirino/task-dashboard-api)**
+**This front-end application belongs to this [back-end project](https://github.com/edercirino/task-dashboard-api)**
 
 ## Table of Contents 📚
 
